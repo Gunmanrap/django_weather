@@ -1,0 +1,45 @@
+{% extends 'weather_app/base.html' %}
+
+
+{% block title %}
+    Главная страница
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link active" aria-current="page">Главная страница</a></li>
+      </ul>
+    </header>
+    <div class="conteiner mt-5">
+        <div class="row">
+            <div class="col-5 offset-1">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <label for="city">Город</label>
+                    {{ form.name }}
+                    <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 offset-1">
+        <h1>Информация</h1>
+        {% for info in all_info %}
+        <div class="alert alert-info">
+            <div class="row">
+                <div class="col-9">
+                    <b>Город: </b>{{ info.city }}<br>
+                    <b>Температура: </b>{{ info.temp }}<sup>0</sup><br>
+                    <button value="Удалить" type="button" name="delete" class="mt-2 btn btn-danger"><a href="delete/{{ info.id }}">Удалить</a></button>
+                </div>
+                <div class="col-2 offset-1">
+                <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="Фото погоды" class="img-thunbnail">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
