@@ -6,7 +6,7 @@ from .forms import CityForm
 
 
 def index(request):
-    appid = '43b4fca5fad5166483354b4ac838879e'
+    appid = ''
     url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + appid
     if request.method == 'POST':
         form = CityForm(request.POST)
